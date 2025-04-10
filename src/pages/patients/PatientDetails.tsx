@@ -1,9 +1,8 @@
-
 import { useParams, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { ArrowLeft, FileEdit, Calendar, Pill, Flask, Receipt, FileText } from "lucide-react";
+import { ArrowLeft, FileEdit, Calendar, Pill, Microscope, Receipt, FileText } from "lucide-react";
 
 // Mock patient data
 const patientData = {
@@ -166,7 +165,7 @@ export default function PatientDetails() {
                   <span>Prescriptions</span>
                 </TabsTrigger>
                 <TabsTrigger value="lab-results" className="flex gap-1">
-                  <Flask className="h-4 w-4" />
+                  <Microscope className="h-4 w-4" />
                   <span>Lab Results</span>
                 </TabsTrigger>
                 <TabsTrigger value="invoices" className="flex gap-1">
