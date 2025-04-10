@@ -211,7 +211,7 @@ export default function AppointmentsPage() {
             <SelectValue placeholder="Doctor" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="">All Doctors</SelectItem>
+            <SelectItem value="all">All Doctors</SelectItem>
             {doctors.map((doctor) => (
               <SelectItem key={doctor.id} value={doctor.name}>
                 {doctor.name}
@@ -225,7 +225,7 @@ export default function AppointmentsPage() {
             <SelectValue placeholder="Status" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="">All Statuses</SelectItem>
+            <SelectItem value="all">All Statuses</SelectItem>
             <SelectItem value="Scheduled">Scheduled</SelectItem>
             <SelectItem value="In Progress">In Progress</SelectItem>
             <SelectItem value="Completed">Completed</SelectItem>
