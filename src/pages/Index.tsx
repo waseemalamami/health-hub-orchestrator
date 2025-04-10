@@ -10,17 +10,14 @@ const Index = () => {
   useEffect(() => {
     if (!isLoading) {
       if (user) {
-        // User is logged in, so we don't need to navigate
-        // The AuthRoute will handle displaying the dashboard
+        navigate("/dashboard", { replace: true });
       } else {
-        // If not logged in, redirect to login
         navigate("/login", { replace: true });
       }
     }
   }, [user, isLoading, navigate]);
 
   // This is just a loading state while checking authentication
-  // The actual rendering is handled by the AuthRoute
   return (
     <div className="min-h-screen flex items-center justify-center">
       <div className="animate-pulse-subtle text-center">

@@ -8,12 +8,14 @@ import { AuthProvider } from "./contexts/AuthContext";
 import AuthRoute from "./components/auth/AuthRoute";
 
 // Pages
+import Index from "./pages/Index";
 import LoginPage from "./pages/LoginPage";
 import DashboardPage from "./pages/DashboardPage";
 import PatientsPage from "./pages/patients/PatientsPage";
 import PatientForm from "./pages/patients/PatientForm";
 import PatientDetails from "./pages/patients/PatientDetails";
 import AppointmentsPage from "./pages/appointments/AppointmentsPage";
+import AppointmentForm from "./pages/appointments/AppointmentForm";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -27,11 +29,12 @@ const App = () => (
         <BrowserRouter>
           <Routes>
             {/* Public routes */}
+            <Route path="/" element={<Index />} />
             <Route path="/login" element={<LoginPage />} />
             
             {/* Protected routes */}
             <Route element={<AuthRoute />}>
-              <Route path="/" element={<DashboardPage />} />
+              <Route path="/dashboard" element={<DashboardPage />} />
               
               {/* Patient routes */}
               <Route path="/patients" element={<PatientsPage />} />
@@ -41,6 +44,8 @@ const App = () => (
               
               {/* Appointment routes */}
               <Route path="/appointments" element={<AppointmentsPage />} />
+              <Route path="/appointments/new" element={<AppointmentForm />} />
+              <Route path="/appointments/:id" element={<AppointmentForm />} />
               
               {/* Add placeholder routes for other modules */}
               <Route path="/prescriptions" element={<div className="p-4">Prescriptions Module (Coming Soon)</div>} />

@@ -9,11 +9,11 @@ interface PageLayoutProps {
 
 export function PageLayout({ children }: PageLayoutProps) {
   return (
-    <div className="flex min-h-screen">
+    <div className="flex min-h-screen bg-muted/30">
       <Sidebar />
       <div className="flex-1 ml-64">
         <TopBar />
-        <main className="p-6">{children}</main>
+        <main className="p-6 max-w-7xl mx-auto">{children}</main>
       </div>
     </div>
   );
