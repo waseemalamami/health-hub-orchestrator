@@ -18,6 +18,23 @@ import AppointmentsPage from "./pages/appointments/AppointmentsPage";
 import AppointmentForm from "./pages/appointments/AppointmentForm";
 import NotFound from "./pages/NotFound";
 
+// Prescription Module
+import PrescriptionsPage from "./pages/prescriptions/PrescriptionsPage";
+import PrescriptionForm from "./pages/prescriptions/PrescriptionForm";
+import PrescriptionDetails from "./pages/prescriptions/PrescriptionDetails";
+
+// Lab Requests Module
+import LabRequestsPage from "./pages/lab-requests/LabRequestsPage";
+
+// Invoices Module
+import InvoicesPage from "./pages/invoices/InvoicesPage";
+
+// Notifications Module
+import NotificationsPage from "./pages/notifications/NotificationsPage";
+
+// Roles Module
+import RolesPage from "./pages/roles/RolesPage";
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -47,12 +64,25 @@ const App = () => (
               <Route path="/appointments/new" element={<AppointmentForm />} />
               <Route path="/appointments/:id" element={<AppointmentForm />} />
               
-              {/* Add placeholder routes for other modules */}
-              <Route path="/prescriptions" element={<div className="p-4">Prescriptions Module (Coming Soon)</div>} />
-              <Route path="/lab-requests" element={<div className="p-4">Lab Requests Module (Coming Soon)</div>} />
-              <Route path="/invoices" element={<div className="p-4">Invoices Module (Coming Soon)</div>} />
-              <Route path="/notifications" element={<div className="p-4">Notifications Module (Coming Soon)</div>} />
-              <Route path="/roles" element={<div className="p-4">Roles & Permissions Module (Coming Soon)</div>} />
+              {/* Prescription routes */}
+              <Route path="/prescriptions" element={<PrescriptionsPage />} />
+              <Route path="/prescriptions/new" element={<PrescriptionForm />} />
+              <Route path="/prescriptions/:id" element={<PrescriptionDetails />} />
+              <Route path="/prescriptions/:id/edit" element={<PrescriptionForm />} />
+              
+              {/* Lab Requests routes */}
+              <Route path="/lab-requests" element={<LabRequestsPage />} />
+              
+              {/* Invoices routes */}
+              <Route path="/invoices" element={<InvoicesPage />} />
+              
+              {/* Notifications routes */}
+              <Route path="/notifications" element={<NotificationsPage />} />
+              
+              {/* Roles routes */}
+              <Route path="/roles" element={<RolesPage />} />
+              
+              {/* Add placeholder routes for remaining modules */}
               <Route path="/attendance" element={<div className="p-4">Attendance Module (Coming Soon)</div>} />
               <Route path="/audit-logs" element={<div className="p-4">Audit Logs Module (Coming Soon)</div>} />
               <Route path="/settings" element={<div className="p-4">Settings Module (Coming Soon)</div>} />
