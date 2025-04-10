@@ -41,7 +41,7 @@ export function Sidebar() {
   const { user, logout } = useAuth();
 
   const sidebarItems = [
-    { icon: <LayoutDashboard size={20} />, label: "Dashboard", href: "/" },
+    { icon: <LayoutDashboard size={20} />, label: "Dashboard", href: "/dashboard" },
     { icon: <Users size={20} />, label: "Patients", href: "/patients" },
     { icon: <CalendarDays size={20} />, label: "Appointments", href: "/appointments" },
     { icon: <ClipboardList size={20} />, label: "Prescriptions", href: "/prescriptions" },
@@ -70,7 +70,7 @@ export function Sidebar() {
             icon={item.icon}
             label={item.label}
             href={item.href}
-            active={pathname === item.href}
+            active={pathname.startsWith(item.href)}
           />
         ))}
       </div>

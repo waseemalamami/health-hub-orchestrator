@@ -35,6 +35,12 @@ import NotificationsPage from "./pages/notifications/NotificationsPage";
 // Roles Module
 import RolesPage from "./pages/roles/RolesPage";
 
+// Attendance Module
+import AttendancePage from "./pages/attendance/AttendancePage";
+import AttendanceForm from "./pages/attendance/AttendanceForm";
+import AttendanceDetail from "./pages/attendance/AttendanceDetail";
+import AttendanceReport from "./pages/attendance/AttendanceReport";
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -82,8 +88,14 @@ const App = () => (
               {/* Roles routes */}
               <Route path="/roles" element={<RolesPage />} />
               
+              {/* Attendance routes */}
+              <Route path="/attendance" element={<AttendancePage />} />
+              <Route path="/attendance/new" element={<AttendanceForm />} />
+              <Route path="/attendance/:id" element={<AttendanceDetail />} />
+              <Route path="/attendance/:id/edit" element={<AttendanceForm />} />
+              <Route path="/attendance/report" element={<AttendanceReport />} />
+              
               {/* Add placeholder routes for remaining modules */}
-              <Route path="/attendance" element={<div className="p-4">Attendance Module (Coming Soon)</div>} />
               <Route path="/audit-logs" element={<div className="p-4">Audit Logs Module (Coming Soon)</div>} />
               <Route path="/settings" element={<div className="p-4">Settings Module (Coming Soon)</div>} />
             </Route>
