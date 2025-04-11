@@ -24,7 +24,7 @@ interface AuditLogDetailsProps {
     resource: string;
     resourceId: string;
     details: string;
-    status: string;
+    status: "success" | "failure" | "warning";
     category: string;
     ipAddress: string;
   };
@@ -44,7 +44,7 @@ export function AuditLogDetails({ log, onClose }: AuditLogDetailsProps) {
           </div>
           <Badge 
             variant={
-              log.status === "success" ? "success" : 
+              log.status === "success" ? "default" : 
               log.status === "failure" ? "destructive" : "outline"
             }
             className="capitalize"

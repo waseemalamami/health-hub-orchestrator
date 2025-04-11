@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { 
   CircleAlert, 
@@ -8,8 +7,7 @@ import {
   FileText, 
   Shield, 
   ShieldAlert, 
-  User, 
-  LucideIcon
+  User
 } from "lucide-react";
 import { 
   Table, 
@@ -165,7 +163,7 @@ export function AuditLogsList({ tab, searchQuery }: AuditLogsListProps) {
                             variant="ghost"
                             size="sm"
                             className="h-7 w-7"
-                            onClick={() => setSelectedLog(log)}
+                            onClick={() => setSelectedLog(log as AuditLogType)}
                           >
                             <FileText className="h-4 w-4" />
                             <span className="sr-only">View details</span>
