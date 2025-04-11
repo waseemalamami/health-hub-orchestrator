@@ -1,7 +1,7 @@
 
 import { useState } from "react";
 import { PageLayout } from "@/components/layout/PageLayout";
-import { FileText, Filter, Search } from "lucide-react";
+import { FileText, Filter, Search, Download } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { 
@@ -16,6 +16,13 @@ import { AuditLogFilters } from "./components/AuditLogFilters";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Separator } from "@/components/ui/separator";
+import { 
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger
+} from "@/components/ui/dropdown-menu";
+import { exportLogsToCSV, exportLogsToJSON } from "./utils/exportUtils";
 
 export default function AuditLogsPage() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -29,6 +36,23 @@ export default function AuditLogsPage() {
           <h1 className="text-2xl font-bold mb-1">Audit Logs</h1>
           <p className="text-muted-foreground">Track and review system activities</p>
         </div>
+        
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="outline" className="gap-1.5">
+              <Download size={16} />
+              Export
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuItem onClick={() => exportLogsToCSV([])}>
+              Export as CSV
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={() => exportLogsToJSON([])}>
+              Export as JSON
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
 
       <Card className="mb-6">
