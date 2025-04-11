@@ -1,6 +1,5 @@
 
 import { useState } from "react";
-import { PageLayout } from "@/components/layout/PageLayout";
 import { FileText, Filter, Search, Download } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -30,7 +29,7 @@ export default function AuditLogsPage() {
   const [activeTab, setActiveTab] = useState("all");
   
   return (
-    <PageLayout>
+    <div className="p-6 max-w-7xl mx-auto">
       <div className="flex items-center justify-between mb-6">
         <div>
           <h1 className="text-2xl font-bold mb-1">Audit Logs</h1>
@@ -138,6 +137,7 @@ export default function AuditLogsPage() {
           <AuditLogsList tab="errors" searchQuery={searchQuery} />
         </TabsContent>
       </Tabs>
-    </PageLayout>
+    </div>
   );
 }
+
