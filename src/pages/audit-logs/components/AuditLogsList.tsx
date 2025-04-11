@@ -1,14 +1,6 @@
+
 import { useState } from "react";
-import { 
-  CircleAlert, 
-  CircleCheck, 
-  Clock, 
-  Download, 
-  FileText, 
-  Shield, 
-  ShieldAlert, 
-  User
-} from "lucide-react";
+import { Download } from "lucide-react";
 import { 
   Table, 
   TableBody, 
@@ -26,15 +18,16 @@ import {
   PaginationNext, 
   PaginationPrevious 
 } from "@/components/ui/pagination";
-import { 
-  Tooltip, 
-  TooltipContent, 
-  TooltipProvider, 
-  TooltipTrigger 
-} from "@/components/ui/tooltip";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger
+} from "@/components/ui/dropdown-menu";
 import { AuditLogDetails } from "./AuditLogDetails";
-import { Badge } from "@/components/ui/badge";
+import { AuditLogListItem } from "./AuditLogListItem";
 import { mockAuditLogs } from "../mockData";
+import { exportLogsToCSV, exportLogsToJSON } from "../utils/exportUtils";
 
 interface AuditLogType {
   id: string;
@@ -81,27 +74,11 @@ export function AuditLogsList({ tab, searchQuery }: AuditLogsListProps) {
     return true;
   });
 
-  const getStatusIcon = (status: string) => {
-    switch (status) {
-      case "success":
-        return <CircleCheck className="h-4 w-4 text-success" />;
-      case "failure":
-        return <CircleAlert className="h-4 w-4 text-destructive" />;
-      default:
-        return <Clock className="h-4 w-4 text-warning" />;
-    }
-  };
-
-  const getCategoryIcon = (category: string) => {
-    switch (category) {
-      case "security":
-        return <Shield className="h-4 w-4 text-accent" />;
-      case "user":
-        return <User className="h-4 w-4 text-primary" />;
-      case "error":
-        return <ShieldAlert className="h-4 w-4 text-destructive" />;
-      default:
-        return <FileText className="h-4 w-4 text-muted-foreground" />;
+  const handleExport = (format: 'csv' | 'json') => {
+    if (format === 'csv') {
+      exportLogsToCSV(filteredLogs as AuditLogType[]);
+    } else {
+      exportLogsToJSON(filteredLogs as AuditLogType[]);
     }
   };
 
@@ -128,54 +105,11 @@ export function AuditLogsList({ tab, searchQuery }: AuditLogsListProps) {
           <TableBody>
             {filteredLogs.length > 0 ? (
               filteredLogs.map((log) => (
-                <TableRow key={log.id}>
-                  <TableCell className="font-mono text-xs">
-                    {new Date(log.timestamp).toLocaleString()}
-                  </TableCell>
-                  <TableCell>
-                    <div className="flex items-center">
-                      <span className="font-medium">{log.user}</span>
-                      <span className="ml-2 text-xs text-muted-foreground">({log.userRole})</span>
-                    </div>
-                  </TableCell>
-                  <TableCell>
-                    <div className="flex items-center gap-1.5">
-                      {getCategoryIcon(log.category)}
-                      <span>{log.action}</span>
-                    </div>
-                  </TableCell>
-                  <TableCell>
-                    <Badge variant="outline" className="font-normal">
-                      {log.resource} {log.resourceId ? `#${log.resourceId}` : ""}
-                    </Badge>
-                  </TableCell>
-                  <TableCell>
-                    <div className="flex items-center gap-1.5">
-                      {getStatusIcon(log.status)}
-                      <span className="capitalize">{log.status}</span>
-                    </div>
-                  </TableCell>
-                  <TableCell className="text-right">
-                    <TooltipProvider>
-                      <Tooltip>
-                        <TooltipTrigger asChild>
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            className="h-7 w-7"
-                            onClick={() => setSelectedLog(log as AuditLogType)}
-                          >
-                            <FileText className="h-4 w-4" />
-                            <span className="sr-only">View details</span>
-                          </Button>
-                        </TooltipTrigger>
-                        <TooltipContent>
-                          <p>View log details</p>
-                        </TooltipContent>
-                      </Tooltip>
-                    </TooltipProvider>
-                  </TableCell>
-                </TableRow>
+                <AuditLogListItem 
+                  key={log.id} 
+                  log={log as AuditLogType} 
+                  onViewDetails={setSelectedLog} 
+                />
               ))
             ) : (
               <TableRow>
@@ -212,10 +146,22 @@ export function AuditLogsList({ tab, searchQuery }: AuditLogsListProps) {
             </PaginationContent>
           </Pagination>
           
-          <Button variant="outline" size="sm" className="flex items-center gap-1.5">
-            <Download className="h-4 w-4" />
-            Export
-          </Button>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="outline" size="sm" className="flex items-center gap-1.5">
+                <Download className="h-4 w-4" />
+                Export
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuItem onClick={() => handleExport('csv')}>
+                Export as CSV
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => handleExport('json')}>
+                Export as JSON
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
       </div>
     </div>
