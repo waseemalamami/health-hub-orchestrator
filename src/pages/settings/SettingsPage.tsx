@@ -1,6 +1,5 @@
 
 import { useState } from "react";
-import { PageLayout } from "@/components/layout/PageLayout";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { 
@@ -24,7 +23,7 @@ export default function SettingsPage() {
   const [activeTab, setActiveTab] = useState("general");
   
   return (
-    <PageLayout>
+    <div className="p-6 max-w-7xl mx-auto">
       <div className="flex items-center justify-between mb-6">
         <div>
           <h1 className="text-2xl font-bold mb-1">Settings</h1>
@@ -102,6 +101,6 @@ export default function SettingsPage() {
           </CardContent>
         </Card>
       </div>
-    </PageLayout>
+    </div>
   );
 }
